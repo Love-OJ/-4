@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1730708534 source:f:\实验4报文解码\123\huffman.cpp
+	"Huffman.h"
+	<queue>
+	<vector>
+
+1730708534 f:\实验4报文解码\123\huffman.h
+	<string>
+	<unordered_map>
+	"Node.h"
+
+1730708534 f:\实验4报文解码\123\node.h
+
+1730708643 source:f:\实验4报文解码\123\main.cpp
+	<iostream>
+	<unordered_map>
+	"Huffman.h"
+	<bits/stdc++.h>
+
