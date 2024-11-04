@@ -8,7 +8,8 @@ struct Compare {
         return left->freq > right->freq; // 小根堆
     }
 };
-//写注释
+
+// 写注释
 // 生成哈夫曼编码
 void genCodes(Node* root, const std::string& str, std::unordered_map<char, std::string>& codes) {
     if (!root) return;
@@ -17,7 +18,6 @@ void genCodes(Node* root, const std::string& str, std::unordered_map<char, std::
     if (!root->left && !root->right) {
         codes[root->ch] = str;
     }
-
     genCodes(root->left, str + "0", codes);
     genCodes(root->right, str + "1", codes);
 }
