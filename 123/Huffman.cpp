@@ -2,18 +2,18 @@
 #include <queue>
 #include <vector>
 
-// ±È½ÏÆ÷£¬ÓÃÓÚÓÅÏÈ¶ÓÁĞ
+// æ¯”è¾ƒå™¨ï¼Œç”¨äºä¼˜å…ˆé˜Ÿåˆ—
 struct Compare {
     bool operator()(Node* left, Node* right) {
-        return left->freq > right->freq; // Ğ¡¸ù¶Ñ
+        return left->freq > right->freq; // å°æ ¹å †
     }
 };
-
-// Éú³É¹ş·òÂü±àÂë
+//å†™æ³¨é‡Š
+// ç”Ÿæˆå“ˆå¤«æ›¼ç¼–ç 
 void genCodes(Node* root, const std::string& str, std::unordered_map<char, std::string>& codes) {
     if (!root) return;
 
-    // Èç¹ûÊÇÒ¶×Ó½Úµã£¬±£´æ±àÂë
+    // å¦‚æœæ˜¯å¶å­èŠ‚ç‚¹ï¼Œä¿å­˜ç¼–ç 
     if (!root->left && !root->right) {
         codes[root->ch] = str;
     }
@@ -22,7 +22,7 @@ void genCodes(Node* root, const std::string& str, std::unordered_map<char, std::
     genCodes(root->right, str + "1", codes);
 }
 
-// ±àÂë±¨ÎÄ
+// ç¼–ç æŠ¥æ–‡
 std::string encodeMsg(const std::string& msg, std::unordered_map<char, std::string>& codes) {
     std::string encoded;
     for (char ch : msg) {
@@ -31,7 +31,7 @@ std::string encodeMsg(const std::string& msg, std::unordered_map<char, std::stri
     return encoded;
 }
 
-// ½âÂë±¨ÎÄ
+// è§£ç æŠ¥æ–‡
 std::string decodeMsg(Node* root, const std::string& encoded) {
     std::string decoded;
     Node* currentNode = root;
@@ -39,25 +39,25 @@ std::string decodeMsg(Node* root, const std::string& encoded) {
     for (char bit : encoded) {
         currentNode = (bit == '0') ? currentNode->left : currentNode->right;
 
-        // µ½´ïÒ¶×Ó½Úµã
+        // åˆ°è¾¾å¶å­èŠ‚ç‚¹
         if (!currentNode->left && !currentNode->right) {
             decoded += currentNode->ch;
-            currentNode = root; // ·µ»Ø¸ù½Úµã
+            currentNode = root; // è¿”å›æ ¹èŠ‚ç‚¹
         }
     }
     return decoded;
 }
 
-// ¹¹½¨¹ş·òÂüÊ÷
+// æ„å»ºå“ˆå¤«æ›¼æ ‘
 Node* buildTree(const std::unordered_map<char, int>& freq) {
     std::priority_queue<Node*, std::vector<Node*>, Compare> minHeap;
 
-    // ½«Ã¿¸ö×Ö·ûºÍÆµÂÊ·ÅÈëÓÅÏÈ¶ÓÁĞ
+    // å°†æ¯ä¸ªå­—ç¬¦å’Œé¢‘ç‡æ”¾å…¥ä¼˜å…ˆé˜Ÿåˆ—
     for (const auto& pair : freq) {
         minHeap.push(new Node(pair.first, pair.second));
     }
 
-    // ¹¹½¨¹ş·òÂüÊ÷
+    // æ„å»ºå“ˆå¤«æ›¼æ ‘
     while (minHeap.size() > 1) {
         Node* left = minHeap.top(); minHeap.pop();
         Node* right = minHeap.top(); minHeap.pop();
@@ -67,5 +67,5 @@ Node* buildTree(const std::unordered_map<char, int>& freq) {
         minHeap.push(merged);
     }
 
-    return minHeap.top(); // ·µ»Ø¸ù½Úµã
+    return minHeap.top(); // è¿”å›æ ¹èŠ‚ç‚¹
 }
