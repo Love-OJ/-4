@@ -7,30 +7,29 @@ int main() {
     std::string message ;
     std::cin>>message;
 
-    // Í³¼Æ×Ö·ûÆµÂÊ
+    // ç»Ÿè®¡å­—ç¬¦é¢‘ç‡
     std::unordered_map<char, int> frequency;
     for (char ch : message) {
         frequency[ch]++;
     }
 
-    // ¹¹½¨¹ş·òÂüÊ÷
+    // æ„å»ºå“ˆå¤«æ›¼æ ‘
     Node* root = buildTree(frequency);
 
-    // Éú³É¹ş·òÂü±àÂë
+    // ç”Ÿæˆå“ˆå¤«æ›¼ç¼–ç 
     std::unordered_map<char, std::string> codes;
     genCodes(root, "", codes);
 
-    // ±àÂë±¨ÎÄ
+    // ç¼–ç æŠ¥æ–‡
     std::string encodedMessage = encodeMsg(message, codes);
     std::cout << "Encoded Message: " << encodedMessage << std::endl;
 
-    // ½âÂë±¨ÎÄ
+    // è§£ç æŠ¥æ–‡
     std::string decodedMessage = decodeMsg(root, encodedMessage);
-
     std::cout << "Decoded Message: " << decodedMessage << std::endl;
 
-    // ÇåÀíÄÚ´æ
-    delete root; // ÕâÀï¿ÉÒÔÌí¼ÓÒ»¸öº¯ÊıÀ´µİ¹éÉ¾³ıÊ÷µÄ½ÚµãÒÔ±ÜÃâÄÚ´æĞ¹Â©
+    // æ¸…ç†å†…å­˜
+    delete root; // è¿™é‡Œå¯ä»¥æ·»åŠ ä¸€ä¸ªå‡½æ•°æ¥é€’å½’åˆ é™¤æ ‘çš„èŠ‚ç‚¹ä»¥é¿å…å†…å­˜æ³„æ¼
 
     return 0;
 }
